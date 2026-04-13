@@ -513,7 +513,7 @@ const ADMIN_PIN = '1234'; // Change this before going live!
 let _sb = null;
 function getSB() {
   if (!_sb) {
-    if (SUPABASE_URL.startsWith('YOUR_') || SUPABASE_ANON_KEY.startsWith('YOUR_')) {
+    if (!SUPABASE_URL.includes('supabase.co') || SUPABASE_ANON_KEY.length < 100) {
       console.warn('Supabase keys not set');
       return null;
     }
@@ -621,7 +621,7 @@ async function submitMessage() {
       mood,
       text,
       nickname: nick || 'a kind stranger',
-      approved: false   // set to false if you want manual review before messages appear
+      approved: true   // set to false if you want manual review before messages appear
     });
 
     if (error) throw error;
