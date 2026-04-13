@@ -505,8 +505,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ─── CONFIGURATION — fill these in after Supabase setup ───────────────────
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://upsqmbhetigzqeodroxw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwc3FtYmhldGlnenFlb2Ryb3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNjc4MTUsImV4cCI6MjA5MTY0MzgxNX0.LNpolL6o8KKskUcXC9H3PfwoI3aCf64QyXpfYuBDtds';
 const ADMIN_PIN = '1234'; // Change this before going live!
 // ──────────────────────────────────────────────────────────────────────────
 
@@ -621,7 +621,7 @@ async function submitMessage() {
       mood,
       text,
       nickname: nick || 'a kind stranger',
-      approved: true   // set to false if you want manual review before messages appear
+      approved: false   // set to false if you want manual review before messages appear
     });
 
     if (error) throw error;
