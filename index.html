@@ -187,23 +187,24 @@
     margin-bottom: 32px;
   }
 
-  .heart-shape {
-    width: 18px;
-    height: 16px;
+ .heart-shape {
+    width: 20px;
+    height: 18px;
     background: var(--terra);
     position: relative;
     transform: rotate(-45deg);
     border-radius: 0;
+    margin: 4px 8px;
   }
   .heart-shape::before, .heart-shape::after {
     content: '';
-    width: 18px; height: 18px;
+    width: 20px; height: 20px;
     background: var(--terra);
     border-radius: 50%;
     position: absolute;
   }
-  .heart-shape::before { top: -9px; left: 0; }
-  .heart-shape::after  { left: 9px; top: 0; }
+  .heart-shape::before { top: -10px; left: 0; }
+  .heart-shape::after  { left: 10px; top: 0; }
 
   .sender-label {
     font-size: 13px;
