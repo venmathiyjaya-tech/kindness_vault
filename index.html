@@ -610,7 +610,7 @@ async function loadMessage() {
       const msg = data[Math.floor(Math.random() * data.length)];
       display.innerHTML = '\u201C' + msg.text + '\u201D';
       sender.textContent = msg.nickname || 'a kind stranger';
-      navigator.vibrate && navigator.vibrate(40);
+      navigator.vibrate && navigator.vibrate([60, 40, 60]);
     } else {
       display.innerHTML = '<em style="color:var(--ink-muted);font-size:16px;">No messages yet for this mood.<br>Be the first to leave one.</em>';
       sender.textContent = '';
