@@ -44,20 +44,9 @@
     opacity: 0;
     animation: rippleOut 7s ease-out infinite;
   }
-
-  .r1 {
-    background: radial-gradient(circle, #83C5BE30 0%, #006D7715 50%, transparent 70%);
-    animation-delay: 0s;
-  }
-  .r2 {
-    background: radial-gradient(circle, #FFDDD240 0%, #E2957820 50%, transparent 70%);
-    animation-delay: 2.3s;
-  }
-  .r3 {
-    background: radial-gradient(circle, #83C5BE25 0%, #83C5BE10 50%, transparent 70%);
-    animation-delay: 4.6s;
-  }
-
+  .r1 { background: radial-gradient(circle, #83C5BE30 0%, #006D7715 50%, transparent 70%); animation-delay: 0s; }
+  .r2 { background: radial-gradient(circle, #FFDDD240 0%, #E2957820 50%, transparent 70%); animation-delay: 2.3s; }
+  .r3 { background: radial-gradient(circle, #83C5BE25 0%, #83C5BE10 50%, transparent 70%); animation-delay: 4.6s; }
   @keyframes rippleOut {
     0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.8; }
     100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
@@ -75,7 +64,6 @@
     justify-content: center;
     animation: fadeUp 0.6s ease forwards;
   }
-
   .screen.active { display: flex; }
 
   @keyframes fadeUp {
@@ -102,11 +90,7 @@
     color: var(--ink);
     margin-bottom: 12px;
   }
-
-  h1 em {
-    font-style: italic;
-    color: var(--teal);
-  }
+  h1 em { font-style: italic; color: var(--teal); }
 
   .subtitle {
     font-size: 14px;
@@ -139,35 +123,17 @@
     text-align: left;
     font-family: 'Jost', sans-serif;
   }
-
   .mood-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,109,119,0.15); }
   .mood-btn:active { transform: translateY(0); }
-
   .mood-btn.green  { background: #d0ede8; }
   .mood-btn.yellow { background: #fff5e0; }
   .mood-btn.blue   { background: #dceef8; }
   .mood-btn.red    { background: var(--blush); }
-
   .mood-icon { font-size: 24px; }
+  .mood-label { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .mood-sub { font-size: 12px; font-weight: 300; color: var(--ink-muted); }
 
-  .mood-label {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  .mood-sub {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--ink-muted);
-  }
-
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: var(--sage);
-    margin: 0 auto 32px;
-  }
+  .divider { width: 40px; height: 1px; background: var(--sage); margin: 0 auto 32px; }
 
   .card {
     background: var(--white);
@@ -219,25 +185,6 @@
     gap: 8px;
     margin-bottom: 32px;
   }
-
- .heart-shape {
-    width: 20px;
-    height: 18px;
-    background: var(--terra);
-    position: relative;
-    transform: rotate(-45deg);
-    border-radius: 0;
-    margin: 4px 8px;
-  }
-  .heart-shape::before, .heart-shape::after {
-    content: '';
-    width: 20px; height: 20px;
-    background: var(--terra);
-    border-radius: 50%;
-    position: absolute;
-  }
-  .heart-shape::before { top: -10px; left: 0; }
-  .heart-shape::after  { left: 10px; top: 0; }
 
   .sender-label {
     font-size: 13px;
@@ -303,7 +250,6 @@
     display: block;
     margin-bottom: 8px;
   }
-
   .form-group { margin-bottom: 20px; }
 
   select, textarea, input[type="text"] {
@@ -320,18 +266,10 @@
     transition: border-color 0.2s ease;
     appearance: none;
   }
-  select:focus, textarea:focus, input[type="text"]:focus {
-    border-color: var(--sage);
-  }
-
+  select:focus, textarea:focus, input[type="text"]:focus { border-color: var(--sage); }
   textarea { resize: none; line-height: 1.6; min-height: 110px; }
 
-  .char-count {
-    font-size: 11px;
-    color: var(--ink-muted);
-    text-align: right;
-    margin-top: 4px;
-  }
+  .char-count { font-size: 11px; color: var(--ink-muted); text-align: right; margin-top: 4px; }
 
   .toast {
     position: fixed;
@@ -368,51 +306,25 @@
   @keyframes dot { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
 
   /* Admin */
-  .admin-entry {
-    background: var(--ice);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
+  .admin-entry { background: var(--ice); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
   .admin-entry p { font-size: 14px; line-height: 1.6; margin-bottom: 6px; }
   .admin-meta { font-size: 12px; color: var(--ink-muted); display: flex; justify-content: space-between; }
   .btn-delete {
-    background: #fee2e2;
-    color: #991b1b;
-    border: none;
-    border-radius: 8px;
-    padding: 4px 12px;
-    font-size: 12px;
-    cursor: pointer;
-    font-family: 'Jost', sans-serif;
+    background: #fee2e2; color: #991b1b; border: none; border-radius: 8px;
+    padding: 4px 12px; font-size: 12px; cursor: pointer; font-family: 'Jost', sans-serif;
   }
-
   .admin-login { position: fixed; bottom: 16px; right: 16px; font-size: 11px; color: var(--sage); cursor: pointer; opacity: 0.5; }
   .admin-login:hover { opacity: 1; }
 
   .back-btn {
-    font-size: 12px;
-    color: var(--ink-muted);
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    margin-bottom: 32px;
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 12px; color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em;
+    margin-bottom: 32px; align-self: flex-start; display: flex; align-items: center; gap: 6px;
   }
   .back-btn:hover { color: var(--teal); }
 
   .success-icon {
-    width: 64px;
-    height: 64px;
-    background: var(--blush);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 28px;
+    width: 64px; height: 64px; background: var(--blush); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px;
   }
 
   .mood-badge-green  { background: #d0ede8; color: #2d6b5e; }
@@ -420,9 +332,87 @@
   .mood-badge-blue   { background: #dceef8; color: #1a5378; }
   .mood-badge-red    { background: var(--blush); color: #8b3a2f; }
 
+  /* ── SCREEN F: Emotion Pulse ────────────────────────────── */
+  #screen-pulse {
+    padding: 32px 28px;
+    justify-content: flex-start;
+  }
+
+  .pulse-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .pulse-subtitle {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+  }
+
+  .canvas-wrap {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0d1f1e;
+    position: relative;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 48px rgba(0,109,119,0.18);
+  }
+
+  #pulseCanvas {
+    width: 100%;
+    display: block;
+  }
+
+  .pulse-legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .legend-item {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 12px rgba(0,109,119,0.06);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px currentColor;
+  }
+
+  .legend-info { flex: 1; }
+  .legend-mood { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .legend-count { font-size: 18px; font-weight: 300; color: var(--teal); font-family: 'Cormorant Garamond', serif; }
+
+  .pulse-note {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-align: center;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
   @media (max-width: 480px) {
     .screen { padding: 36px 20px; }
     h1 { font-size: 32px; }
+    #screen-pulse { padding: 28px 16px; }
   }
 </style>
 </head>
@@ -480,7 +470,7 @@
     </div>
     <p class="reveal-hint" onclick="revealSender()">tap to reveal who wrote this</p>
     <div class="divider"></div>
-    <button class="btn-primary" onclick="showContribute()">Pay it Forward &rarr;</button>
+    <button class="btn-primary" onclick="showContribute()">Pay it Forward →</button>
     <button class="btn-ghost" onclick="loadMessage()">Show me another</button>
   </div>
 </div>
@@ -520,8 +510,9 @@
   <div class="success-icon">🕊</div>
   <h1>Your light is<br><em>in the vault</em></h1>
   <p class="subtitle">Someone will find it when they need it most. Thank you for being that person.</p>
-  <div style="width:100%;">
-    <button class="btn-primary" onclick="goHome()">Back to the beginning</button>
+  <div style="width:100%; display:flex; flex-direction:column; gap:12px;">
+    <button class="btn-primary" onclick="showPulse()">See how others are feeling →</button>
+    <button class="btn-ghost" onclick="goHome()">Back to the beginning</button>
   </div>
 </div>
 
@@ -534,27 +525,47 @@
   <div id="admin-list" style="width:100%;"></div>
 </div>
 
+<!-- SCREEN F: Emotion Pulse -->
+<div class="screen" id="screen-pulse">
+  <div class="logo" style="margin-bottom: 16px;">Kindness Vault</div>
+  <span class="back-btn" onclick="goHome(); stopPulse();">← back</span>
+
+  <div class="pulse-header">
+    <h1 style="font-size:30px; margin-bottom:6px;">The <em>campus pulse</em></h1>
+  </div>
+  <p class="pulse-subtitle">Every thread is someone who showed up today.</p>
+
+  <div class="canvas-wrap">
+    <canvas id="pulseCanvas"></canvas>
+  </div>
+
+  <div class="pulse-legend" id="pulse-legend">
+    <!-- filled by JS -->
+  </div>
+
+  <p class="pulse-note" id="pulse-note">Loading the vault...</p>
+
+  <div style="width:100%;">
+    <button class="btn-primary" onclick="goHome(); stopPulse();">Back to the beginning</button>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
-
-<!-- Admin trigger -->
 <div class="admin-login" onclick="adminLogin()" title="Admin">⚙</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ─── CONFIGURATION — fill these in after Supabase setup ───────────────────
-const SUPABASE_URL = 'https://upsqmbhetigzqeodroxw.supabase.co';
+// ─── CONFIG ────────────────────────────────────────────────
+const SUPABASE_URL     = 'https://upsqmbhetigzqeodroxw.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwc3FtYmhldGlnenFlb2Ryb3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNjc4MTUsImV4cCI6MjA5MTY0MzgxNX0.LNpolL6o8KKskUcXC9H3PfwoI3aCf64QyXpfYuBDtds';
-const ADMIN_PIN = '1234'; // Change this before going live!
-// ──────────────────────────────────────────────────────────────────────────
+const ADMIN_PIN        = '1234';
+// ───────────────────────────────────────────────────────────
 
 let _sb = null;
 function getSB() {
   if (!_sb) {
-    if (!SUPABASE_URL.includes('supabase.co') || SUPABASE_ANON_KEY.length < 100) {
-      console.warn('Supabase keys not set');
-      return null;
-    }
+    if (!SUPABASE_URL.includes('supabase.co') || SUPABASE_ANON_KEY.length < 100) return null;
     _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
   return _sb;
@@ -567,7 +578,7 @@ const BANNED_WORDS = [
 
 let currentMood = null;
 
-// ── Navigation ──────────────────────────────────────────────────────────────
+// ── Navigation ──────────────────────────────────────────────
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
@@ -576,7 +587,7 @@ function showScreen(id) {
 }
 function goHome() { showScreen('screen-landing'); }
 
-// ── Phase A: Mood selection ─────────────────────────────────────────────────
+// ── Phase A ─────────────────────────────────────────────────
 function selectMood(mood, label, chipLabel) {
   currentMood = mood;
   document.getElementById('mood-chip-label').textContent = 'Feeling ' + chipLabel.toLowerCase();
@@ -586,7 +597,7 @@ function selectMood(mood, label, chipLabel) {
   loadMessage();
 }
 
-// ── Phase B: Fetch a random message from Supabase ──────────────────────────
+// ── Phase B ─────────────────────────────────────────────────
 async function loadMessage() {
   const display = document.getElementById('message-display');
   const sender  = document.getElementById('sender-display');
@@ -595,17 +606,12 @@ async function loadMessage() {
   sender.classList.remove('revealed');
 
   try {
-    // Fetch all messages for this mood, pick one at random client-side
     const client = getSB();
-    if (!client) { document.getElementById('message-display').innerHTML = '<em style="color:var(--ink-muted);font-size:15px;">Set your Supabase keys to load messages.</em>'; return; }
+    if (!client) { display.innerHTML = '<em style="color:var(--ink-muted);font-size:15px;">Set your Supabase keys to load messages.</em>'; return; }
     const { data, error } = await client
-      .from('messages')
-      .select('id, text, nickname')
-      .eq('mood', currentMood)
-      .eq('approved', true);
-
+      .from('messages').select('id, text, nickname')
+      .eq('mood', currentMood).eq('approved', true);
     if (error) throw error;
-
     if (data && data.length) {
       const msg = data[Math.floor(Math.random() * data.length)];
       display.innerHTML = '\u201C' + msg.text + '\u201D';
@@ -616,30 +622,20 @@ async function loadMessage() {
       sender.textContent = '';
     }
   } catch(e) {
-    display.innerHTML = '<em style="color:var(--ink-muted);font-size:15px;">Couldn\'t reach the vault right now.<br>Check your connection and try again.</em>';
+    display.innerHTML = '<em style="color:var(--ink-muted);font-size:15px;">Couldn\'t reach the vault right now.</em>';
     sender.textContent = '';
-    console.error('Supabase fetch error:', e);
   }
 }
 
-function revealSender() {
-  document.getElementById('sender-display').classList.add('revealed');
-}
+function revealSender() { document.getElementById('sender-display').classList.add('revealed'); }
 
-// ── Phase C: Contribute ────────────────────────────────────────────────────
+// ── Phase C ─────────────────────────────────────────────────
 function showContribute() {
   document.getElementById('submit-mood').value = currentMood || 'yellow';
   showScreen('screen-contribute');
 }
-
-function updateCount(el) {
-  document.getElementById('char-count').textContent = el.value.length;
-}
-
-function hasBannedWord(text) {
-  const lower = text.toLowerCase();
-  return BANNED_WORDS.some(w => lower.includes(w));
-}
+function updateCount(el) { document.getElementById('char-count').textContent = el.value.length; }
+function hasBannedWord(text) { return BANNED_WORDS.some(w => text.toLowerCase().includes(w)); }
 
 async function submitMessage() {
   const mood = document.getElementById('submit-mood').value;
@@ -655,30 +651,24 @@ async function submitMessage() {
 
   try {
     const client = getSB();
-    if (!client) { showToast('Supabase keys not configured'); btn.textContent = 'Send it into the vault'; btn.disabled = false; return; }
+    if (!client) { showToast('Supabase keys not configured'); return; }
     const { error } = await client.from('messages').insert({
-      mood,
-      text,
-      nickname: nick || 'a kind stranger',
-      approved: true   // set to false if you want manual review before messages appear
+      mood, text, nickname: nick || 'a kind stranger', approved: true
     });
-
     if (error) throw error;
-
     document.getElementById('submit-message').value = '';
     document.getElementById('submit-nickname').value = '';
     document.getElementById('char-count').textContent = '0';
     showScreen('screen-success');
   } catch(e) {
     showToast('Something went wrong — try again');
-    console.error('Supabase insert error:', e);
   } finally {
     btn.textContent = 'Send it into the vault';
     btn.disabled = false;
   }
 }
 
-// ── Toast ──────────────────────────────────────────────────────────────────
+// ── Toast ────────────────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -686,7 +676,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── Admin ──────────────────────────────────────────────────────────────────
+// ── Admin ────────────────────────────────────────────────────
 function adminLogin() {
   const pin = prompt('Enter admin PIN:');
   if (pin === ADMIN_PIN) renderAdmin();
@@ -697,39 +687,27 @@ async function renderAdmin() {
   showScreen('screen-admin');
   const list = document.getElementById('admin-list');
   list.innerHTML = '<div class="loading-dots" style="margin:32px auto;"><span></span><span></span><span></span></div>';
-
   const client = getSB();
   if (!client) { list.innerHTML = '<p style="font-size:14px;color:var(--ink-muted);text-align:center;">Supabase not configured.</p>'; return; }
-  const { data, error } = await client
-    .from('messages')
-    .select('*')
-    .order('created_at', { ascending: false });
-
+  const { data, error } = await client.from('messages').select('*').order('created_at', { ascending: false });
   list.innerHTML = '';
-
-  if (error) {
-    list.innerHTML = '<p style="font-size:14px;color:var(--ink-muted);text-align:center;">Could not load messages.</p>';
+  if (error || !data || !data.length) {
+    list.innerHTML = '<p style="font-size:14px;color:var(--ink-muted);text-align:center;">' + (error ? 'Could not load.' : 'No messages yet.') + '</p>';
     return;
   }
-  if (!data || !data.length) {
-    list.innerHTML = '<p style="font-size:14px;color:var(--ink-muted);text-align:center;">No messages yet.</p>';
-    return;
-  }
-
   const moodNames = { green:'Content', yellow:'Stressed', blue:'Tired', red:'Overwhelmed' };
   data.forEach(m => {
     const div = document.createElement('div');
     div.className = 'admin-entry';
     div.id = 'entry-' + m.id;
-    const statusBadge = m.approved
+    const badge = m.approved
       ? '<span style="color:#2d6b5e;font-size:11px;">✓ visible</span>'
       : '<span style="color:#7a5c1c;font-size:11px;">⏸ hidden</span>';
-    div.innerHTML = `
-      <p>${m.text}</p>
+    div.innerHTML = `<p>${m.text}</p>
       <div class="admin-meta">
-        <span>${moodNames[m.mood] || m.mood} · ${m.nickname} ${statusBadge}</span>
+        <span>${moodNames[m.mood]||m.mood} · ${m.nickname} ${badge}</span>
         <span style="display:flex;gap:6px;">
-          <button class="btn-delete" style="background:#e0f2fe;color:#0369a1;" onclick="toggleApprove('${m.id}', ${m.approved})">${m.approved ? 'Hide' : 'Show'}</button>
+          <button class="btn-delete" style="background:#e0f2fe;color:#0369a1;" onclick="toggleApprove('${m.id}',${m.approved})">${m.approved?'Hide':'Show'}</button>
           <button class="btn-delete" onclick="deleteMsg('${m.id}')">Delete</button>
         </span>
       </div>`;
@@ -740,20 +718,230 @@ async function renderAdmin() {
 async function toggleApprove(id, current) {
   const client = getSB(); if (!client) return;
   const { error } = await client.from('messages').update({ approved: !current }).eq('id', id);
-  if (!error) renderAdmin();
-  else showToast('Could not update — try again');
+  if (!error) renderAdmin(); else showToast('Could not update');
 }
-
 async function deleteMsg(id) {
   const client = getSB(); if (!client) return;
   const { error } = await client.from('messages').delete().eq('id', id);
-  if (!error) {
-    document.getElementById('entry-' + id)?.remove();
-    showToast('Message removed');
-  } else {
-    showToast('Could not delete — try again');
-  }
+  if (!error) { document.getElementById('entry-' + id)?.remove(); showToast('Message removed'); }
+  else showToast('Could not delete');
 }
+
+// ══════════════════════════════════════════════════════════════
+// ── SCREEN F: EMOTION PULSE — Animated Canvas Network ─────────
+// ══════════════════════════════════════════════════════════════
+
+const MOOD_META = {
+  green:  { label: 'Content',     color: '#83C5BE', glow: '#83C5BE' },
+  yellow: { label: 'Anxious',     color: '#f0c96b', glow: '#f0c96b' },
+  blue:   { label: 'Tired',       color: '#7eb8d4', glow: '#7eb8d4' },
+  red:    { label: 'Overwhelmed', color: '#E29578', glow: '#E29578' },
+};
+
+let pulseRAF = null;
+let pulseNodes = [];
+let pulseCounts = { green: 0, yellow: 0, blue: 0, red: 0 };
+
+async function showPulse() {
+  showScreen('screen-pulse');
+  document.getElementById('pulse-note').textContent = 'Reading the vault…';
+  document.getElementById('pulse-legend').innerHTML = '';
+
+  const client = getSB();
+  if (!client) {
+    document.getElementById('pulse-note').textContent = 'Supabase not connected.';
+    return;
+  }
+
+  const { data, error } = await client
+    .from('messages').select('mood').eq('approved', true);
+
+  if (error || !data) {
+    document.getElementById('pulse-note').textContent = 'Could not load data.';
+    return;
+  }
+
+  // Count moods
+  pulseCounts = { green: 0, yellow: 0, blue: 0, red: 0 };
+  data.forEach(r => { if (pulseCounts[r.mood] !== undefined) pulseCounts[r.mood]++; });
+  const total = data.length;
+
+  // Build legend
+  const legend = document.getElementById('pulse-legend');
+  legend.innerHTML = '';
+  Object.entries(MOOD_META).forEach(([key, meta]) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <div class="legend-dot" style="background:${meta.color}; box-shadow: 0 0 8px ${meta.color};"></div>
+      <div class="legend-info">
+        <div class="legend-mood">${meta.label}</div>
+        <div class="legend-count">${pulseCounts[key]} <span style="font-size:12px;color:var(--ink-muted);">people</span></div>
+      </div>`;
+    legend.appendChild(item);
+  });
+
+  // Update note
+  const dominant = Object.entries(pulseCounts).sort((a,b) => b[1]-a[1])[0];
+  const domName = MOOD_META[dominant[0]].label.toLowerCase();
+  document.getElementById('pulse-note').textContent =
+    total === 0
+      ? 'No data yet — be the first.'
+      : `${total} ${total === 1 ? 'person has' : 'people have'} checked in today. Most are feeling ${domName}.`;
+
+  // Draw canvas
+  initPulseCanvas(pulseCounts, total);
+}
+
+function stopPulse() {
+  if (pulseRAF) { cancelAnimationFrame(pulseRAF); pulseRAF = null; }
+}
+
+function initPulseCanvas(counts, total) {
+  stopPulse();
+  const canvas = document.getElementById('pulseCanvas');
+  const wrap   = canvas.parentElement;
+  const W = wrap.clientWidth;
+  const H = Math.round(W * 0.72);
+  canvas.width  = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Build nodes — one per message, distributed by mood proportion
+  pulseNodes = [];
+  const moods = ['green','yellow','blue','red'];
+
+  // Always show at least 1 demo node per mood so canvas is never empty
+  const effectiveCounts = { ...counts };
+  moods.forEach(m => { if (effectiveCounts[m] === 0) effectiveCounts[m] = 1; });
+  const effectiveTotal = Object.values(effectiveCounts).reduce((a,b)=>a+b,0);
+
+  const MAX_NODES = 80;
+  moods.forEach(mood => {
+    const proportion = effectiveCounts[mood] / effectiveTotal;
+    const nodeCount  = Math.max(3, Math.round(proportion * MAX_NODES));
+    for (let i = 0; i < nodeCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.18 + Math.random() * 0.28;
+      pulseNodes.push({
+        x:    Math.random() * W,
+        y:    Math.random() * H,
+        vx:   Math.cos(angle) * speed,
+        vy:   Math.sin(angle) * speed,
+        r:    1.8 + Math.random() * 2.8,
+        mood,
+        color: MOOD_META[mood].color,
+        alpha: 0.5 + Math.random() * 0.5,
+        // wave offset for gentle floating
+        waveOffset: Math.random() * Math.PI * 2,
+        waveSpeed:  0.008 + Math.random() * 0.012,
+      });
+    }
+  });
+
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Dark background gradient
+    const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.8);
+    bg.addColorStop(0, '#152826');
+    bg.addColorStop(1, '#0a1614');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    t++;
+
+    // Update positions
+    pulseNodes.forEach(n => {
+      n.waveOffset += n.waveSpeed;
+      n.x += n.vx + Math.sin(n.waveOffset) * 0.15;
+      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.1;
+      // Wrap edges
+      if (n.x < -10) n.x = W + 10;
+      if (n.x > W+10) n.x = -10;
+      if (n.y < -10) n.y = H + 10;
+      if (n.y > H+10) n.y = -10;
+    });
+
+    // Draw connections
+    const CONNECTION_DIST = W * 0.18;
+    for (let i = 0; i < pulseNodes.length; i++) {
+      for (let j = i + 1; j < pulseNodes.length; j++) {
+        const a = pulseNodes[i];
+        const b = pulseNodes[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < CONNECTION_DIST) {
+          const strength = 1 - dist / CONNECTION_DIST;
+          // Same mood = bright line, different = dimmer cross-connection
+          const sameMood = a.mood === b.mood;
+          const lineAlpha = sameMood ? strength * 0.55 : strength * 0.12;
+
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+
+          // Slight curve for organic feel
+          const mx = (a.x + b.x) / 2 + (Math.random() - 0.5) * 8;
+          const my = (a.y + b.y) / 2 + (Math.random() - 0.5) * 8;
+          ctx.quadraticCurveTo(mx, my, b.x, b.y);
+
+          if (sameMood) {
+            ctx.strokeStyle = MOOD_META[a.mood].color;
+          } else {
+            // blend: use a muted mid color
+            ctx.strokeStyle = '#83C5BE';
+          }
+          ctx.globalAlpha = lineAlpha;
+          ctx.lineWidth   = sameMood ? strength * 1.2 : 0.4;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+
+    // Draw nodes
+    pulseNodes.forEach(n => {
+      // Glow
+      const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      grd.addColorStop(0, n.color + 'cc');
+      grd.addColorStop(1, n.color + '00');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.globalAlpha = n.alpha * 0.4;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.globalAlpha = n.alpha;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // Subtle scanline overlay for depth
+    ctx.fillStyle = 'rgba(0,0,0,0.03)';
+    for (let y = 0; y < H; y += 4) {
+      ctx.fillRect(0, y, W, 1);
+    }
+
+    pulseRAF = requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+// Stop animation when leaving pulse screen
+document.querySelectorAll('.back-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (!document.getElementById('screen-pulse').classList.contains('active')) return;
+    stopPulse();
+  });
+});
 </script>
 </body>
 </html>
