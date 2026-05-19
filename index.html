@@ -825,7 +825,7 @@ function initPulseCanvas(counts, total) {
     const nodeCount  = Math.max(3, Math.round(proportion * MAX_NODES));
     for (let i = 0; i < nodeCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = 0.04 + Math.random() * 0.08;
+      const speed = 0.02 + Math.random() * 0.03;
       pulseNodes.push({
         x:    Math.random() * W,
         y:    Math.random() * H,
@@ -868,7 +868,7 @@ function initPulseCanvas(counts, total) {
     });
 
     // Draw connections
-    const CONNECTION_DIST = W * 0.18;
+    const CONNECTION_DIST = W * 0.13;
     for (let i = 0; i < pulseNodes.length; i++) {
       for (let j = i + 1; j < pulseNodes.length; j++) {
         const a = pulseNodes[i];
@@ -884,11 +884,7 @@ function initPulseCanvas(counts, total) {
 
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
-
-          // Slight curve for organic feel
-          const mx = (a.x + b.x) / 2 + (Math.random() - 0.5) * 8;
-          const my = (a.y + b.y) / 2 + (Math.random() - 0.5) * 8;
-          ctx.quadraticCurveTo(mx, my, b.x, b.y);
+          ctx.lineTo(b.x, b.y);
 
           if (sameMood) {
             ctx.strokeStyle = MOOD_META[a.mood].color;
