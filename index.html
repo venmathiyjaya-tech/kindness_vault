@@ -825,7 +825,7 @@ function initPulseCanvas(counts, total) {
     const nodeCount  = Math.max(3, Math.round(proportion * MAX_NODES));
     for (let i = 0; i < nodeCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = 0.18 + Math.random() * 0.28;
+      const speed = 0.04 + Math.random() * 0.08;
       pulseNodes.push({
         x:    Math.random() * W,
         y:    Math.random() * H,
@@ -858,8 +858,8 @@ function initPulseCanvas(counts, total) {
     // Update positions
     pulseNodes.forEach(n => {
       n.waveOffset += n.waveSpeed;
-      n.x += n.vx + Math.sin(n.waveOffset) * 0.15;
-      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.1;
+      n.x += n.vx + Math.sin(n.waveOffset) * 0.05;
+      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.04;
       // Wrap edges
       if (n.x < -10) n.x = W + 10;
       if (n.x > W+10) n.x = -10;
@@ -1011,9 +1011,11 @@ function initPulseCanvas(counts, total) {
       pulseRAF = requestAnimationFrame(starLoop);
     };
     pulseRAF = requestAnimationFrame(starLoop);
+    return; // ← stop here, don't call draw() below
   }
 
   draw();
+}
 }
 
 // Stop animation when leaving pulse screen
