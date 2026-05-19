@@ -656,9 +656,12 @@ async function submitMessage() {
       mood, text, nickname: nick || 'a kind stranger', approved: true
     });
     if (error) throw error;
+    const submittedNick = nick || null;
     document.getElementById('submit-message').value = '';
     document.getElementById('submit-nickname').value = '';
     document.getElementById('char-count').textContent = '0';
+    if (submittedNick) sessionStorage.setItem('kv_new_star', submittedNick);
+    else sessionStorage.removeItem('kv_new_star');
     showScreen('screen-success');
   } catch(e) {
     showToast('Something went wrong — try again');
@@ -930,6 +933,84 @@ function initPulseCanvas(counts, total) {
     }
 
     pulseRAF = requestAnimationFrame(draw);
+  }
+
+  // ── New star: floating nickname ──────────────────────────
+  const newStar = sessionStorage.getItem('kv_new_star');
+  if (newStar) {
+    let starAlpha  = 0;
+    let starY      = H * 0.5;
+    let starX      = W * 0.5;
+    let starPhase  = 'fadein'; // fadein → hold → fadeout → done
+    let starTick   = 0;
+    const HOLD     = 120; // frames to hold at full opacity
+
+    const originalDraw = draw;
+    const drawWithStar = function() {
+      originalDraw();
+
+      starTick++;
+      if (starPhase === 'fadein') {
+        starAlpha = Math.min(1, starAlpha + 0.025);
+        if (starAlpha >= 1) { starPhase = 'hold'; starTick = 0; }
+      } else if (starPhase === 'hold') {
+        if (starTick > HOLD) { starPhase = 'fadeout'; }
+      } else if (starPhase === 'fadeout') {
+        starAlpha = Math.max(0, starAlpha - 0.018);
+        if (starAlpha <= 0) {
+          starPhase = 'done';
+          sessionStorage.removeItem('kv_new_star');
+        }
+      }
+
+      if (starPhase === 'done') return;
+
+      // Gentle float
+      starY += Math.sin(starTick * 0.03) * 0.4;
+
+      // Outer glow ring
+      ctx.save();
+      ctx.globalAlpha = starAlpha * 0.25;
+      const ring = ctx.createRadialGradient(starX, starY - 28, 0, starX, starY - 28, 38);
+      ring.addColorStop(0, '#FFDDD2');
+      ring.addColorStop(1, 'transparent');
+      ctx.fillStyle = ring;
+      ctx.beginPath();
+      ctx.arc(starX, starY - 28, 38, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Star dot
+      ctx.save();
+      ctx.globalAlpha = starAlpha;
+      ctx.beginPath();
+      ctx.arc(starX, starY - 28, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFDDD2';
+      ctx.shadowColor = '#E29578';
+      ctx.shadowBlur = 16;
+      ctx.fill();
+      ctx.restore();
+
+      // Name label
+      ctx.save();
+      ctx.globalAlpha = starAlpha * 0.92;
+      ctx.font = '300 13px "Jost", sans-serif';
+      ctx.fillStyle = '#FFDDD2';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '0.08em';
+      ctx.shadowColor = '#E2957888';
+      ctx.shadowBlur = 10;
+      ctx.fillText(newStar, starX, starY - 8);
+      ctx.restore();
+    };
+
+    // Swap the RAF loop to use drawWithStar
+    cancelAnimationFrame(pulseRAF);
+    const starLoop = function() {
+      drawWithStar();
+      pulseRAF = requestAnimationFrame(starLoop);
+    };
+    pulseRAF = requestAnimationFrame(starLoop);
   }
 
   draw();
