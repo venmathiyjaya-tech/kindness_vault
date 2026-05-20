@@ -206,6 +206,7 @@
     margin-bottom: 16px;
     cursor: pointer;
     letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
   }
 
   .btn-primary {
@@ -307,7 +308,6 @@
   .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes dot { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
 
-  /* Admin */
   .admin-entry { background: var(--ice); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
   .admin-entry p { font-size: 14px; line-height: 1.6; margin-bottom: 6px; }
   .admin-meta { font-size: 12px; color: var(--ink-muted); display: flex; justify-content: space-between; }
@@ -334,26 +334,9 @@
   .mood-badge-blue   { background: #dceef8; color: #1a5378; }
   .mood-badge-red    { background: var(--blush); color: #8b3a2f; }
 
-  /* ── SCREEN F: Emotion Pulse ────────────────────────────── */
-  #screen-pulse {
-    padding: 32px 28px;
-    justify-content: flex-start;
-  }
-
-  .pulse-header {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 6px;
-  }
-
-  .pulse-subtitle {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink-muted);
-    text-align: center;
-    margin-bottom: 24px;
-    letter-spacing: 0.03em;
-  }
+  #screen-pulse { padding: 32px 28px; justify-content: flex-start; }
+  .pulse-header { width: 100%; text-align: center; margin-bottom: 6px; }
+  .pulse-subtitle { font-size: 13px; font-weight: 300; color: var(--ink-muted); text-align: center; margin-bottom: 24px; letter-spacing: 0.03em; }
 
   .canvas-wrap {
     width: 100%;
@@ -364,51 +347,22 @@
     margin-bottom: 24px;
     box-shadow: 0 8px 48px rgba(0,109,119,0.18);
   }
+  #pulseCanvas { width: 100%; display: block; }
 
-  #pulseCanvas {
-    width: 100%;
-    display: block;
-  }
-
-  .pulse-legend {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 24px;
-  }
-
+  .pulse-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 24px; }
   .legend-item {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 2px 12px rgba(0,109,119,0.06);
+    background: var(--white); border-radius: 14px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 12px rgba(0,109,119,0.06);
   }
-
-  .legend-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 0 6px currentColor;
-  }
-
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .legend-info { flex: 1; }
   .legend-mood { font-size: 12px; font-weight: 500; color: var(--ink); }
   .legend-count { font-size: 18px; font-weight: 300; color: var(--teal); font-family: 'Cormorant Garamond', serif; }
 
   .pulse-note {
-    font-size: 12px;
-    color: var(--ink-muted);
-    text-align: center;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 300;
-    margin-bottom: 28px;
-    line-height: 1.6;
+    color: var(--ink-muted); text-align: center; font-style: italic;
+    font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300;
+    margin-bottom: 28px; line-height: 1.6;
   }
 
   @media (max-width: 480px) {
@@ -471,7 +425,7 @@
       <span style="font-size:18px; line-height:1; color: var(--terra);">♥</span>
       <span class="sender-label" id="sender-display">a gentle stranger</span>
     </div>
-    <p class="reveal-hint" id="reveal-hint-text" onclick="revealSender()">tap the name to reveal</p>
+    <p class="reveal-hint" id="reveal-hint-text">tap the name to reveal</p>
     <div class="divider"></div>
     <button class="btn-primary" onclick="showContribute()">Pay it Forward →</button>
     <button class="btn-ghost" onclick="loadMessage()">Show me another</button>
@@ -532,38 +486,28 @@
 <div class="screen" id="screen-pulse">
   <div class="logo" style="margin-bottom: 16px;">Kindness Vault</div>
   <span class="back-btn" onclick="goHome(); stopPulse();">← back</span>
-
   <div class="pulse-header">
     <h1 style="font-size:30px; margin-bottom:6px;">The <em>campus pulse</em></h1>
   </div>
   <p class="pulse-subtitle">Every thread is someone who showed up today.</p>
-
   <div class="canvas-wrap">
     <canvas id="pulseCanvas"></canvas>
   </div>
-
-  <div class="pulse-legend" id="pulse-legend">
-    <!-- filled by JS -->
-  </div>
-
+  <div class="pulse-legend" id="pulse-legend"></div>
   <p class="pulse-note" id="pulse-note">Loading the vault...</p>
-
   <div style="width:100%;">
     <button class="btn-primary" onclick="goHome(); stopPulse();">Back to the beginning</button>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 <div class="admin-login" onclick="adminLogin()" title="Admin">⚙</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ─── CONFIG ────────────────────────────────────────────────
 const SUPABASE_URL     = 'https://upsqmbhetigzqeodroxw.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwc3FtYmhldGlnenFlb2Ryb3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNjc4MTUsImV4cCI6MjA5MTY0MzgxNX0.LNpolL6o8KKskUcXC9H3PfwoI3aCf64QyXpfYuBDtds';
 const ADMIN_PIN        = '1234';
-// ───────────────────────────────────────────────────────────
 
 let _sb = null;
 function getSB() {
@@ -581,7 +525,6 @@ const BANNED_WORDS = [
 
 let currentMood = null;
 
-// ── Navigation ──────────────────────────────────────────────
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
@@ -590,17 +533,17 @@ function showScreen(id) {
 }
 function goHome() { showScreen('screen-landing'); }
 
-// ── Phase A ─────────────────────────────────────────────────
 function selectMood(mood, label, chipLabel) {
   currentMood = mood;
   document.getElementById('mood-chip-label').textContent = 'Feeling ' + chipLabel.toLowerCase();
   document.getElementById('mood-chip-label').className = 'mood-chip mood-badge-' + mood;
   document.getElementById('sender-display').classList.remove('revealed');
+  const hint = document.getElementById('reveal-hint-text');
+  if (hint) hint.style.opacity = '1';
   showScreen('screen-message');
   loadMessage();
 }
 
-// ── Phase B ─────────────────────────────────────────────────
 async function loadMessage() {
   const display = document.getElementById('message-display');
   const sender  = document.getElementById('sender-display');
@@ -617,7 +560,7 @@ async function loadMessage() {
     if (error) throw error;
     if (data && data.length) {
       const msg = data[Math.floor(Math.random() * data.length)];
-      display.innerHTML = '\u201C' + msg.text + '\u201D';
+      display.innerHTML = '“' + msg.text + '”';
       sender.textContent = msg.nickname || 'a kind stranger';
       navigator.vibrate && navigator.vibrate(80);
     } else {
@@ -636,7 +579,6 @@ function revealSender() {
   if (hint) hint.style.opacity = '0';
 }
 
-// ── Phase C ─────────────────────────────────────────────────
 function showContribute() {
   document.getElementById('submit-mood').value = currentMood || 'yellow';
   showScreen('screen-contribute');
@@ -678,7 +620,6 @@ async function submitMessage() {
   }
 }
 
-// ── Toast ────────────────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -686,7 +627,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── Admin ────────────────────────────────────────────────────
 function adminLogin() {
   const pin = prompt('Enter admin PIN:');
   if (pin === ADMIN_PIN) renderAdmin();
@@ -737,20 +677,16 @@ async function deleteMsg(id) {
   else showToast('Could not delete');
 }
 
-// ══════════════════════════════════════════════════════════════
-// ── SCREEN F: EMOTION PULSE — Animated Canvas Network ─────────
-// ══════════════════════════════════════════════════════════════
-
+// ── EMOTION PULSE ──────────────────────────────────────────
 const MOOD_META = {
-  green:  { label: 'Content',     color: '#83C5BE', glow: '#83C5BE' },
-  yellow: { label: 'Anxious',     color: '#f0c96b', glow: '#f0c96b' },
-  blue:   { label: 'Tired',       color: '#7eb8d4', glow: '#7eb8d4' },
-  red:    { label: 'Overwhelmed', color: '#E29578', glow: '#E29578' },
+  green:  { label: 'Content',     color: '#83C5BE' },
+  yellow: { label: 'Anxious',     color: '#f0c96b' },
+  blue:   { label: 'Tired',       color: '#7eb8d4' },
+  red:    { label: 'Overwhelmed', color: '#E29578' },
 };
 
 let pulseRAF = null;
 let pulseNodes = [];
-let pulseCounts = { green: 0, yellow: 0, blue: 0, red: 0 };
 
 async function showPulse() {
   showScreen('screen-pulse');
@@ -758,25 +694,15 @@ async function showPulse() {
   document.getElementById('pulse-legend').innerHTML = '';
 
   const client = getSB();
-  if (!client) {
-    document.getElementById('pulse-note').textContent = 'Supabase not connected.';
-    return;
-  }
+  if (!client) { document.getElementById('pulse-note').textContent = 'Supabase not connected.'; return; }
 
-  const { data, error } = await client
-    .from('messages').select('mood').eq('approved', true);
+  const { data, error } = await client.from('messages').select('mood').eq('approved', true);
+  if (error || !data) { document.getElementById('pulse-note').textContent = 'Could not load data.'; return; }
 
-  if (error || !data) {
-    document.getElementById('pulse-note').textContent = 'Could not load data.';
-    return;
-  }
-
-  // Count moods
-  pulseCounts = { green: 0, yellow: 0, blue: 0, red: 0 };
-  data.forEach(r => { if (pulseCounts[r.mood] !== undefined) pulseCounts[r.mood]++; });
+  const counts = { green: 0, yellow: 0, blue: 0, red: 0 };
+  data.forEach(r => { if (counts[r.mood] !== undefined) counts[r.mood]++; });
   const total = data.length;
 
-  // Build legend
   const legend = document.getElementById('pulse-legend');
   legend.innerHTML = '';
   Object.entries(MOOD_META).forEach(([key, meta]) => {
@@ -786,28 +712,24 @@ async function showPulse() {
       <div class="legend-dot" style="background:${meta.color}; box-shadow: 0 0 8px ${meta.color};"></div>
       <div class="legend-info">
         <div class="legend-mood">${meta.label}</div>
-        <div class="legend-count">${pulseCounts[key]} <span style="font-size:12px;color:var(--ink-muted);">people</span></div>
+        <div class="legend-count">${counts[key]} <span style="font-size:12px;color:var(--ink-muted);">people</span></div>
       </div>`;
     legend.appendChild(item);
   });
 
-  // Update note
-  const dominant = Object.entries(pulseCounts).sort((a,b) => b[1]-a[1])[0];
-  const domName = MOOD_META[dominant[0]].label.toLowerCase();
-  document.getElementById('pulse-note').textContent =
-    total === 0
-      ? 'No data yet — be the first.'
-      : `${total} ${total === 1 ? 'person has' : 'people have'} checked in today. Most are feeling ${domName}.`;
+  const dominant = Object.entries(counts).sort((a,b) => b[1]-a[1])[0];
+  document.getElementById('pulse-note').textContent = total === 0
+    ? 'No data yet — be the first.'
+    : `${total} ${total === 1 ? 'person has' : 'people have'} checked in today. Most are feeling ${MOOD_META[dominant[0]].label.toLowerCase()}.`;
 
-  // Draw canvas
-  initPulseCanvas(pulseCounts, total);
+  initPulseCanvas(counts);
 }
 
 function stopPulse() {
   if (pulseRAF) { cancelAnimationFrame(pulseRAF); pulseRAF = null; }
 }
 
-function initPulseCanvas(counts, total) {
+function initPulseCanvas(counts) {
   stopPulse();
   const canvas = document.getElementById('pulseCanvas');
   const wrap   = canvas.parentElement;
@@ -817,88 +739,76 @@ function initPulseCanvas(counts, total) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // Build nodes — one per message, distributed by mood proportion
   pulseNodes = [];
   const moods = ['green','yellow','blue','red'];
-
-  // Always show at least 1 demo node per mood so canvas is never empty
   const effectiveCounts = { ...counts };
   moods.forEach(m => { if (effectiveCounts[m] === 0) effectiveCounts[m] = 1; });
   const effectiveTotal = Object.values(effectiveCounts).reduce((a,b)=>a+b,0);
 
-  const MAX_NODES = 40;
+  // GOOD VALUES — from the version that looked right
+  const MAX_NODES = 80;
   moods.forEach(mood => {
     const proportion = effectiveCounts[mood] / effectiveTotal;
-    const nodeCount  = Math.max(2, Math.round(proportion * MAX_NODES));
+    const nodeCount  = Math.max(3, Math.round(proportion * MAX_NODES));
     for (let i = 0; i < nodeCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = 0.008 + Math.random() * 0.012;
+      const speed = 0.18 + Math.random() * 0.28;
       pulseNodes.push({
-        x:    Math.random() * W,
-        y:    Math.random() * H,
-        vx:   Math.cos(angle) * speed,
-        vy:   Math.sin(angle) * speed,
-        r:    2.5 + Math.random() * 2,
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: 1.8 + Math.random() * 2.8,
         mood,
         color: MOOD_META[mood].color,
-        alpha: 0.7 + Math.random() * 0.3,
+        alpha: 0.5 + Math.random() * 0.5,
         waveOffset: Math.random() * Math.PI * 2,
-        waveSpeed:  0.003 + Math.random() * 0.004,
+        waveSpeed: 0.008 + Math.random() * 0.012,
       });
     }
   });
 
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
+  // throttle to ~30fps for smoothness
+  let last = 0;
+  const FPS = 30;
+  const INTERVAL = 1000 / FPS;
 
-    // Dark background gradient
+  function draw(ts) {
+    pulseRAF = requestAnimationFrame(draw);
+    if (ts - last < INTERVAL) return;
+    last = ts;
+
+    ctx.clearRect(0, 0, W, H);
     const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.8);
     bg.addColorStop(0, '#152826');
     bg.addColorStop(1, '#0a1614');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    t++;
-
-    // Update positions
     pulseNodes.forEach(n => {
       n.waveOffset += n.waveSpeed;
-      n.x += n.vx + Math.sin(n.waveOffset) * 0.012;
-      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.01;
-      // Wrap edges
+      n.x += n.vx + Math.sin(n.waveOffset) * 0.15;
+      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.1;
       if (n.x < -10) n.x = W + 10;
       if (n.x > W+10) n.x = -10;
       if (n.y < -10) n.y = H + 10;
       if (n.y > H+10) n.y = -10;
     });
 
-    // Draw connections
-    const CONNECTION_DIST = W * 0.28;
+    const CONNECTION_DIST = W * 0.18;
     for (let i = 0; i < pulseNodes.length; i++) {
       for (let j = i + 1; j < pulseNodes.length; j++) {
-        const a = pulseNodes[i];
-        const b = pulseNodes[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
+        const a = pulseNodes[i], b = pulseNodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
         const dist = Math.sqrt(dx*dx + dy*dy);
         if (dist < CONNECTION_DIST) {
           const strength = 1 - dist / CONNECTION_DIST;
-          // Same mood = bright line, different = dimmer cross-connection
           const sameMood = a.mood === b.mood;
-          const lineAlpha = sameMood ? strength * 0.55 : strength * 0.12;
-
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
-
-          if (sameMood) {
-            ctx.strokeStyle = MOOD_META[a.mood].color;
-          } else {
-            // blend: use a muted mid color
-            ctx.strokeStyle = '#83C5BE';
-          }
-          ctx.globalAlpha = lineAlpha;
+          ctx.strokeStyle = sameMood ? MOOD_META[a.mood].color : '#83C5BE';
+          ctx.globalAlpha = sameMood ? strength * 0.55 : strength * 0.12;
           ctx.lineWidth   = sameMood ? strength * 1.2 : 0.4;
           ctx.stroke();
           ctx.globalAlpha = 1;
@@ -906,9 +816,7 @@ function initPulseCanvas(counts, total) {
       }
     }
 
-    // Draw nodes
     pulseNodes.forEach(n => {
-      // Glow
       const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
       grd.addColorStop(0, n.color + 'cc');
       grd.addColorStop(1, n.color + '00');
@@ -919,7 +827,6 @@ function initPulseCanvas(counts, total) {
       ctx.fill();
       ctx.globalAlpha = 1;
 
-      // Core dot
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fillStyle = n.color;
@@ -928,91 +835,54 @@ function initPulseCanvas(counts, total) {
       ctx.globalAlpha = 1;
     });
 
-    // Subtle scanline overlay for depth
-    ctx.fillStyle = 'rgba(0,0,0,0.03)';
-    for (let y = 0; y < H; y += 4) {
-      ctx.fillRect(0, y, W, 1);
-    }
+    // star overlay
+    if (starPhase !== 'done') {
+      starTick++;
+      if (starPhase === 'fadein') {
+        starAlpha = Math.min(1, starAlpha + 0.025);
+        if (starAlpha >= 1) { starPhase = 'hold'; starTick = 0; }
+      } else if (starPhase === 'hold') {
+        if (starTick > 120) starPhase = 'fadeout';
+      } else if (starPhase === 'fadeout') {
+        starAlpha = Math.max(0, starAlpha - 0.018);
+        if (starAlpha <= 0) { starPhase = 'done'; sessionStorage.removeItem('kv_new_star'); }
+      }
 
-    pulseRAF = requestAnimationFrame(draw);
-  }
+      if (starPhase !== 'done') {
+        starY += Math.sin(starTick * 0.03) * 0.4;
+        ctx.save();
+        ctx.globalAlpha = starAlpha * 0.25;
+        const ring = ctx.createRadialGradient(starX, starY - 28, 0, starX, starY - 28, 38);
+        ring.addColorStop(0, '#FFDDD2'); ring.addColorStop(1, 'transparent');
+        ctx.fillStyle = ring;
+        ctx.beginPath(); ctx.arc(starX, starY - 28, 38, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
 
-  // ── New star: floating nickname ──────────────────────────
-  const newStar = sessionStorage.getItem('kv_new_star');
-  let starAlpha = 0;
-  let starY     = H * 0.5;
-  let starX     = W * 0.5;
-  let starPhase = newStar ? 'fadein' : 'done';
-  let starTick  = 0;
-  const HOLD    = 120;
+        ctx.save();
+        ctx.globalAlpha = starAlpha;
+        ctx.beginPath(); ctx.arc(starX, starY - 28, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFDDD2'; ctx.shadowColor = '#E29578'; ctx.shadowBlur = 16; ctx.fill();
+        ctx.restore();
 
-  function loop() {
-    draw();
-
-    if (starPhase === 'done') {
-      pulseRAF = requestAnimationFrame(loop);
-      return;
-    }
-
-    starTick++;
-    if (starPhase === 'fadein') {
-      starAlpha = Math.min(1, starAlpha + 0.025);
-      if (starAlpha >= 1) { starPhase = 'hold'; starTick = 0; }
-    } else if (starPhase === 'hold') {
-      if (starTick > HOLD) starPhase = 'fadeout';
-    } else if (starPhase === 'fadeout') {
-      starAlpha = Math.max(0, starAlpha - 0.018);
-      if (starAlpha <= 0) {
-        starPhase = 'done';
-        sessionStorage.removeItem('kv_new_star');
-        pulseRAF = requestAnimationFrame(loop);
-        return;
+        ctx.save();
+        ctx.globalAlpha = starAlpha * 0.92;
+        ctx.font = '300 13px "Jost", sans-serif';
+        ctx.fillStyle = '#FFDDD2'; ctx.textAlign = 'center';
+        ctx.shadowColor = '#E2957888'; ctx.shadowBlur = 10;
+        ctx.fillText(newStar, starX, starY - 8);
+        ctx.restore();
       }
     }
-
-    starY += Math.sin(starTick * 0.03) * 0.4;
-
-    // Outer glow ring
-    ctx.save();
-    ctx.globalAlpha = starAlpha * 0.25;
-    const ring = ctx.createRadialGradient(starX, starY - 28, 0, starX, starY - 28, 38);
-    ring.addColorStop(0, '#FFDDD2');
-    ring.addColorStop(1, 'transparent');
-    ctx.fillStyle = ring;
-    ctx.beginPath();
-    ctx.arc(starX, starY - 28, 38, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    // Star dot
-    ctx.save();
-    ctx.globalAlpha = starAlpha;
-    ctx.beginPath();
-    ctx.arc(starX, starY - 28, 5, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFDDD2';
-    ctx.shadowColor = '#E29578';
-    ctx.shadowBlur = 16;
-    ctx.fill();
-    ctx.restore();
-
-    // Name label
-    ctx.save();
-    ctx.globalAlpha = starAlpha * 0.92;
-    ctx.font = '300 13px "Jost", sans-serif';
-    ctx.fillStyle = '#FFDDD2';
-    ctx.textAlign = 'center';
-    ctx.shadowColor = '#E2957888';
-    ctx.shadowBlur = 10;
-    ctx.fillText(newStar, starX, starY - 8);
-    ctx.restore();
-
-    pulseRAF = requestAnimationFrame(loop);
   }
 
-  loop();
+  const newStar = sessionStorage.getItem('kv_new_star');
+  let starAlpha = 0, starY = H * 0.5, starX = W * 0.5;
+  let starPhase = newStar ? 'fadein' : 'done';
+  let starTick = 0;
+
+  pulseRAF = requestAnimationFrame(draw);
 }
 
-// Stop animation when leaving pulse screen
 document.querySelectorAll('.back-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     if (!document.getElementById('screen-pulse').classList.contains('active')) return;
