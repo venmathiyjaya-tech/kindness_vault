@@ -206,7 +206,7 @@
     margin-bottom: 16px;
     cursor: pointer;
     letter-spacing: 0.05em;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.9s ease, transform 0.9s ease;
   }
 
   .btn-primary {
@@ -560,12 +560,18 @@ async function loadMessage() {
     if (error) throw error;
     if (data && data.length) {
       const msg = data[Math.floor(Math.random() * data.length)];
-      display.style.opacity = '0';
-      display.innerHTML = '“' + msg.text + '”';
       sender.textContent = msg.nickname || 'a kind stranger';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => { display.style.opacity = '1'; });
-      });
+      display.style.opacity = '0';
+      setTimeout(() => {
+        display.style.transform = 'translateY(8px)';
+        display.innerHTML = '\u201C' + msg.text + '\u201D';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            display.style.opacity = '1';
+            display.style.transform = 'translateY(0)';
+          });
+        });
+      }, 300);
     } else {
       display.innerHTML = '<em style="color:var(--ink-muted);font-size:16px;">No messages yet for this mood.<br>Be the first to leave one.</em>';
       sender.textContent = '';
