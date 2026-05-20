@@ -832,19 +832,18 @@ function initPulseCanvas(counts, total) {
     const nodeCount  = Math.max(2, Math.round(proportion * MAX_NODES));
     for (let i = 0; i < nodeCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = 0.02 + Math.random() * 0.03;
+      const speed = 0.008 + Math.random() * 0.012;
       pulseNodes.push({
         x:    Math.random() * W,
         y:    Math.random() * H,
         vx:   Math.cos(angle) * speed,
         vy:   Math.sin(angle) * speed,
-        r:    1.8 + Math.random() * 2.8,
+        r:    2.5 + Math.random() * 2,
         mood,
         color: MOOD_META[mood].color,
-        alpha: 0.5 + Math.random() * 0.5,
-        // wave offset for gentle floating
+        alpha: 0.7 + Math.random() * 0.3,
         waveOffset: Math.random() * Math.PI * 2,
-        waveSpeed:  0.008 + Math.random() * 0.012,
+        waveSpeed:  0.003 + Math.random() * 0.004,
       });
     }
   });
@@ -865,8 +864,8 @@ function initPulseCanvas(counts, total) {
     // Update positions
     pulseNodes.forEach(n => {
       n.waveOffset += n.waveSpeed;
-      n.x += n.vx + Math.sin(n.waveOffset) * 0.05;
-      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.04;
+      n.x += n.vx + Math.sin(n.waveOffset) * 0.012;
+      n.y += n.vy + Math.cos(n.waveOffset * 0.7) * 0.01;
       // Wrap edges
       if (n.x < -10) n.x = W + 10;
       if (n.x > W+10) n.x = -10;
@@ -875,7 +874,7 @@ function initPulseCanvas(counts, total) {
     });
 
     // Draw connections
-    const CONNECTION_DIST = W * 0.13;
+    const CONNECTION_DIST = W * 0.28;
     for (let i = 0; i < pulseNodes.length; i++) {
       for (let j = i + 1; j < pulseNodes.length; j++) {
         const a = pulseNodes[i];
