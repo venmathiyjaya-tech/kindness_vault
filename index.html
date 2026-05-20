@@ -122,9 +122,11 @@
     transition: transform 0.18s ease, box-shadow 0.18s ease;
     text-align: left;
     font-family: 'Jost', sans-serif;
+    box-shadow: 0 6px 0px rgba(0,109,119,0.15), 0 8px 20px rgba(0,109,119,0.12);
+    transform: translateY(-2px);
   }
-  .mood-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,109,119,0.15); }
-  .mood-btn:active { transform: translateY(0); }
+  .mood-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 0px rgba(0,109,119,0.15), 0 14px 28px rgba(0,109,119,0.18); }
+  .mood-btn:active { transform: translateY(1px); box-shadow: 0 2px 0px rgba(0,109,119,0.15), 0 4px 10px rgba(0,109,119,0.1); }
   .mood-btn.green  { background: #d0ede8; }
   .mood-btn.yellow { background: #fff5e0; }
   .mood-btn.blue   { background: #dceef8; }
@@ -450,6 +452,7 @@
     </button>
   </div>
   <p style="font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; text-align:center;">anonymous · safe · kind</p>
+  <p style="font-size: 12px; color: var(--sage); margin-top: 20px; cursor: pointer; letter-spacing: 0.05em;" onclick="showPulse()">see how campus is feeling today →</p>
 </div>
 
 <!-- SCREEN B: Message -->
@@ -464,11 +467,11 @@
     <div class="message-body" id="message-display">
       <div class="loading-dots"><span></span><span></span><span></span></div>
     </div>
-    <div class="heart-blur">
+    <div class="heart-blur" onclick="revealSender()" style="cursor:pointer;">
       <span style="font-size:18px; line-height:1; color: var(--terra);">♥</span>
       <span class="sender-label" id="sender-display">a gentle stranger</span>
     </div>
-    <p class="reveal-hint" onclick="revealSender()">tap to reveal who wrote this</p>
+    <p class="reveal-hint" id="reveal-hint-text" onclick="revealSender()">tap the name to reveal</p>
     <div class="divider"></div>
     <button class="btn-primary" onclick="showContribute()">Pay it Forward →</button>
     <button class="btn-ghost" onclick="loadMessage()">Show me another</button>
@@ -627,7 +630,11 @@ async function loadMessage() {
   }
 }
 
-function revealSender() { document.getElementById('sender-display').classList.add('revealed'); }
+function revealSender() {
+  document.getElementById('sender-display').classList.add('revealed');
+  const hint = document.getElementById('reveal-hint-text');
+  if (hint) hint.style.opacity = '0';
+}
 
 // ── Phase C ─────────────────────────────────────────────────
 function showContribute() {
@@ -819,10 +826,10 @@ function initPulseCanvas(counts, total) {
   moods.forEach(m => { if (effectiveCounts[m] === 0) effectiveCounts[m] = 1; });
   const effectiveTotal = Object.values(effectiveCounts).reduce((a,b)=>a+b,0);
 
-  const MAX_NODES = 80;
+  const MAX_NODES = 40;
   moods.forEach(mood => {
     const proportion = effectiveCounts[mood] / effectiveTotal;
-    const nodeCount  = Math.max(3, Math.round(proportion * MAX_NODES));
+    const nodeCount  = Math.max(2, Math.round(proportion * MAX_NODES));
     for (let i = 0; i < nodeCount; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = 0.02 + Math.random() * 0.03;
